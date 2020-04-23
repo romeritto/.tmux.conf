@@ -17,9 +17,11 @@ echo -e "${GREEN}Do you want to setup tmux?${NC}"
 select yn in "Yes" "No"; do
     case $yn in
         Yes)
-          sudo apt install -y tmux;
+          # The config is downloaded first in order to be used straight away after installation.
+          # I'm actually not sure if it's needed.
           wget https://raw.githubusercontent.com/sobkulir/setup/master/.tmux.conf \
                -O ~/.tmux.conf;
+          sudo apt install -y tmux;
           break;;
         No) break;;
     esac
