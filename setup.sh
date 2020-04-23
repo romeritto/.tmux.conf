@@ -11,6 +11,9 @@ NC='\033[0m' # No Color
 sudo apt -y update
 sudo apt -y upgrade
 
+# Git
+echo -e "${GREEN}Installing git${NC}"
+sudo apt install -y git
 
 # Tmux
 echo -e "${GREEN}Do you want to setup tmux?${NC}"
