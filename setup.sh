@@ -12,7 +12,7 @@ sudo apt -y update
 sudo apt -y upgrade
 
 
-# Setup tmux.
+# Tmux
 echo -e "${GREEN}Do you want to setup tmux?${NC}"
 select yn in "Yes" "No"; do
     case $yn in
@@ -25,7 +25,7 @@ select yn in "Yes" "No"; do
     esac
 done
 
-# Setup vim
+# Vim
 echo -e "${GREEN}Do you want to setup vim?${NC}"
 select yn in "Yes" "No"; do
     case $yn in
@@ -37,4 +37,23 @@ select yn in "Yes" "No"; do
         No) break;;
     esac
 done
+
+# Docker
+echo -e "${GREEN}Do you want to setup Docker?${NC}"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes)
+          wget https://get.docker.com -O /tmp/get-docker.sh
+          sudo sh /tmp/get-docker.sh
+          ORIG_USER="$USER"
+          sudo usermod -aG docker "$ORIG_USER"
+
+          # Docker-compose
+          sudo wget "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -O /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+          break;;
+        No) break;;
+    esac
+done
+
 
