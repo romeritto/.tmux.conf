@@ -61,4 +61,30 @@ select yn in "Yes" "No"; do
     esac
 done
 
+# ZSH
+echo -e "${GREEN}Do you want to setup ZSH?${NC}"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes)
+          sudo apt install -y zsh
+          # ohmyzsh
+          sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+          wget https://raw.githubusercontent.com/sobkulir/setup/master/.zshrc \
+            -O ~/.zshrc;
 
+          # autosuggestions, syntax-highliting
+          git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+          git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+          # for the agnoster theme
+          sudo apt install -y fonts-powerline
+          wget https://raw.githubusercontent.com/sobkulir/setup/master/agnoster.zsh-theme \
+            -O ~/.oh-my-zsh/themes/agnoster.zsh-theme;
+          # In terminal profile pick Solarized (manually for now)
+          # change background color to: #18171F 
+          # change bottom left color to: #6A6A68
+          # change terminal opacity to: none
+          break;;
+        No) break;;
+    esac
+done
